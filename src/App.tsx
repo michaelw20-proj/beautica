@@ -16,11 +16,13 @@ import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import Product from "./pages/Product";
 
+import promo from "./data/promo.json";
 
 const queryClient = new QueryClient();
 
 const SlideText = () => {
   const { theme } = useTheme();  
+  const title = promo[0].title;
 
   return (
     <div
@@ -49,7 +51,7 @@ const SlideText = () => {
           ease: "linear",
         }}
       >
-        Welcome to BEAUTICA BEAUTY COLOUR Website | Cantik Engga Harus Mahal | Where Beauty Begins with Your Colours
+        Welcome to BEAUTICA BEAUTY COLOUR Website | {title}
       </motion.div>
     </div>
   );
