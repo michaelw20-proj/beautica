@@ -1,60 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { ZoomIn } from 'lucide-react';
-
-interface ColorOption {
-  name: string;
-  value: string;
-  image: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  images: string[];
-  description: string;
-  colors?: ColorOption[];
-  Keunggulan: string[];
-  isNew?: boolean;
-  isBestSeller?: boolean;
-  isNewArrival?: boolean;
-  slug: string;
-}
+import { Product } from '../types/product';
 
 interface ProductDetailProps {
-  product?: Product;
+  product: Product;
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ product: productProp }) => {
-  const { slug } = useParams();
-  const [product, setProduct] = useState<Product | null>(productProp || null);
+const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [hoveredImageIndex, setHoveredImageIndex] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState(-1);
   const [hoveredColorIndex, setHoveredColorIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
-
-  useEffect(() => {
-    if (!productProp && slug) {
-      fetch(`/api/products/${slug}`)
-        .then((res) => {
-          if (!res.ok) throw new Error('Product not found');
-          return res.json();
-        })
-        .then((data) => setProduct(data))
-        .catch(() => setProduct(null));
-    }
-  }, [slug, productProp]);
-
-  if (!product) {
-    return (
-      <div className="text-center py-32 text-xl text-gray-500">
-        Produk tidak ditemukan.
-      </div>
-    );
-  }
 
   const getCurrentImage = () => {
     if (hoveredColorIndex !== null && product.colors?.[hoveredColorIndex]) {
@@ -184,21 +142,31 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product: productProp }) =
           </ul>
         </div>
 
-        <Button onClick={handleAddToCartShopee} className="w-14 h-10 p-0 hover:bg-pink-400 transition mr-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Shopee_logo.svg/1200px-Shopee_logo.svg.png"
-            alt="Shopee"
-            className="inline-flex items-center justify-center bg-[hsl(var(--tiktok-background))] w-20 h-16"
-          />
-        </Button>
+        <div className="flex space-x-4">
+          <Button 
+            onClick={handleAddToCartShopee} 
+            className="flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors duration-300"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Shopee_logo.svg/1200px-Shopee_logo.svg.png"
+              alt="Shopee"
+              className="w-6 h-6 mr-2"
+            />
+            Buy on Shopee
+          </Button>
 
-        <Button onClick={handleAddToCartTiktok} className="w-15 h-10 p-0 hover:bg-pink-400 transition">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg"
-            alt="Tiktok"
-            className="inline-flex items-center justify-center bg-[hsl(var(--tiktok-background))] w-16 h-16"
-          />
-        </Button>
+          <Button 
+            onClick={handleAddToCartTiktok} 
+            className="flex items-center justify-center bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-lg transition-colors duration-300"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg"
+              alt="TikTok"
+              className="w-6 h-6 mr-2"
+            />
+            Buy on TikTok
+          </Button>
+        </div>
       </div>
     </div>
   );

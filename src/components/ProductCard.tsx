@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   id: number;
@@ -7,6 +8,7 @@ interface ProductCardProps {
   category: string;
   image: string;
   description: string;
+  slug: string;
   isNew?: boolean;
   isBestSeller?: boolean;
 }
@@ -16,6 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   category,
   image,
   description,
+  slug,
   isNew,
   isBestSeller
 }) => {
@@ -58,10 +61,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-5 line-clamp-2 min-h-[2.5rem]">
           {description}
         </p>
-          <button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 
-          hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg text-sm">
-          Learn More
-        </button>
+          <Link 
+            to={`/products/${slug}`}
+            className="block w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 
+            hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg text-sm text-center"
+          >
+            Learn More
+          </Link>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ const BestSellersPage = () => {
       category: "Mascara",
       image: "/Produk/Mascara/beautica-mascara-marble.jpg",
       description: "",
+      slug: "m-m",
       isBestSeller: true
     },
     {
@@ -19,6 +20,7 @@ const BestSellersPage = () => {
       category: "Eyeshadow",
       image: "/Produk/Eyeshadow/10-mix-eyeshadow.png",
       description: "",
+      slug: "es-10mix",
       isBestSeller: true
     },
     {
@@ -27,6 +29,7 @@ const BestSellersPage = () => {
       category: "Eyeshadow",
       image: "/Produk/Eyeshadow/sweet-eyeshadow.png",
       description: "",
+      slug: "es-sweet",
       isBestSeller: true
     },
     {
@@ -35,6 +38,7 @@ const BestSellersPage = () => {
       category: "Nail Polish",
       image: "/Produk/Nail-Polish/OIl Nail Polish/beautica-mahkota.jpg",
       description: "",
+      slug: "NP-mahkota",
       isBestSeller: true
     },
     {
@@ -43,6 +47,7 @@ const BestSellersPage = () => {
       category: "Nail Polish",
       image: "/Produk/Nail-Polish/OIl Nail Polish/Red/red-nail-polish-2.jpg",
       description: "",
+      slug: "NP-Red-Series",
       isBestSeller: true
     },
     {
@@ -51,6 +56,7 @@ const BestSellersPage = () => {
       category: "Nail Polish",
       image: "/Produk/SN/308SN.jpg",
       description: "",
+      slug: "NP-cb",
       isBestSeller: true
     },
   ];

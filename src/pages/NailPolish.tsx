@@ -1,70 +1,23 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
+import { getProductsByCategory } from '../data/products';
 
 const Nailpolish = () => {
   const navigate = useNavigate();
 
-  const products = [
-    // Nail Polish Category
-    {
-      id: 1,
-      name: "BEAUTY COLOUR 588 CB",
-      category: "",
-      image: "produk/Nail Polish/OIl Nail Polish/588CB.png",
-      description: "",
-      slug: "np-cb"
-    },
-    {
-      id: 2,
-      name: "BEAUTICA Gepeng",
-      category: "",
-      image: "/Produk/Nail Polish/gepeng/gepeng-1.png",
-      description: "",
-      slug: "np-gepeng"
-    },
-    {
-      id: 3,
-      name: "BEAUTICA Mahkota",
-      category: "",
-      image: "/Produk/Nail Polish/OIl Nail Polish/Beautica-Mahkota.png",
-      description: "",
-      slug: "np-mahkota"
-    },
-    {
-      id: 4,
-      name: "BEAUTY COLOUR Maroon",
-      category: "",
-      image: "/Produk/Nail Polish/OIl Nail Polish/Maroon-nail-polish.png",
-      description: "",
-      slug: "np-maroon"
-    },
-    {
-      id: 5,
-      name: "BEAUTICA Red Series",
-      category: "",
-      image: "/Produk/Nail Polish/OIl Nail Polish/Red Series - done/Red-Nail-Polish-1.png",
-      description: "",
-      slug: "np-red-series"
-    },
-    {id: 6,
-      name: "BEAUTICA Clear Edition",
-      category: "",
-      image: "/Produk/Clear edition/clear-collection.png",
-      description: "",
-      slug: "np-clear-edition"
-    },
-    {id: 7,
-      name: "BEAUTY COLOUR Black Edition",
-      category: "",
-      image: "/Produk/Black edition/black edition.png",
-      description: "",
-      slug: "np-black-edition"
-    },
-  ];
+  // Get nail polish products from centralized data
+  const nailPolishProducts = getProductsByCategory('Nail Polish');
+  const products = nailPolishProducts.map(product => ({
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    image: product.images[0],
+    description: product.description,
+    slug: product.slug
+  }));
 
   const categories = [
     { 
@@ -80,7 +33,7 @@ const Nailpolish = () => {
     ? products 
     : products.filter(product => product.category === selectedCategory);
 
-  const handleProductClick = (product: any) => {
+  const handleProductClick = (product: { id: number; name: string; category: string; image: string; description: string; slug: string; }) => {
     if (product.slug) {
       navigate(`/products/${product.slug}`);
     }

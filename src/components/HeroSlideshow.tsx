@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const HeroSlideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    { id: 1, image: "produk/Slideshow/Home1.webp" },
-    { id: 2, image: "produk/Slideshow/Home2.webp" },
-    { id: 3, image: "produk/Slideshow/Home3.webp" },
-    { id: 4, image: "produk/Slideshow/Home4.webp" },
-    { id: 5, image: "produk/Slideshow/Home5.webp" }
-  ];
+  const slides = useMemo(() => [
+    { id: 1, image: "/produk/Slideshow/Home1.webp" },
+    { id: 2, image: "/produk/Slideshow/Home2.webp" },
+    { id: 3, image: "/produk/Slideshow/Home3.webp" },
+    { id: 4, image: "/produk/Slideshow/Home4.webp" },
+    { id: 5, image: "/produk/Slideshow/Home5.webp" }
+  ], []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,7 +23,7 @@ const HeroSlideshow = () => {
     const nextIndex = (currentSlide + 1) % slides.length;
     const img = new Image();
     img.src = slides[nextIndex].image;
-  }, [currentSlide]);
+  }, [currentSlide, slides]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);

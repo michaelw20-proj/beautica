@@ -23,7 +23,7 @@ const About = () => {
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <img
-            src="/Produk/Logo/Logo-stm.png"
+            src="/produk/Logo/Logo-stm.png"
             alt="Beautica | Beauty Colour"
             className="w-full h-96 object-cover rounded-2xl shadow-xl"
           />

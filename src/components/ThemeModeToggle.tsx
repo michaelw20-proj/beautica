@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Sun, Moon, Settings } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
@@ -17,7 +16,7 @@ const ThemeModeToggle = () => {
       <ToggleGroup 
         type="single" 
         value={mode} 
-        onValueChange={(value) => value && setMode(value as any)}
+        onValueChange={(value) => value && setMode(value as 'light' | 'dark' | 'auto')}
         className="grid grid-cols-2 gap-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-md"
       >
         <ToggleGroupItem 

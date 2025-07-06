@@ -1,30 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
+interface MenuItem {
+  name: string;
+  path: string;
+}
+
+interface ThemeOption {
+  value: 'light' | 'dark' | 'auto';
+  icon: typeof Sun | typeof Moon | 'custom';
+}
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bouncedQuery, setBouncedQuery] = useState('');
-  const [filteredResults, setFilteredResults] = useState<any[]>([]);
+  const [filteredResults, setFilteredResults] = useState<MenuItem[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { mode, setMode } = useTheme();
   const navigate = useNavigate();
 
-  const menuItems = [
+  const menuItems: MenuItem[] = useMemo(() => [
     { name: 'About', path: '/about' },
     { name: 'New Arrival', path: '/new-arrival' },
     { name: 'Best Sellers', path: '/best-sellers' },
     { name: 'Makeup', path: '/makeup' },
     { name: 'Nail Polish', path: '/nail-polish' },
     { name: 'FAQ', path: '/faq' },
-  ];
+  ], []);
 
-  const allproducts = [];
-  const allItems = [...menuItems, ...allproducts];
+  const allproducts: MenuItem[] = useMemo(() => [], []);
+  const allItems: MenuItem[] = useMemo(() => [...menuItems, ...allproducts], [menuItems, allproducts]);
 
-  const themeOptions = [
+  const themeOptions: ThemeOption[] = [
     { value: 'light', icon: Sun },
     { value: 'dark', icon: Moon },
     { value: 'auto', icon: 'custom' },
@@ -34,15 +44,18 @@ const Navbar = () => {
     if (mode === 'auto') {
       return (
         <img
-          src="/Produk/Logo/auto-mode.png"
+          src="/produk/Logo/auto-mode.png"
           alt="Auto Mode"
           className="w-5 h-5 dark:invert"
         />
       );
     }
     const option = themeOptions.find(opt => opt.value === mode);
-    const Icon = option?.icon as any;
-    return <Icon className="w-5 h-5" />;
+    if (option && option.icon !== 'custom') {
+      const Icon = option.icon;
+      return <Icon className="w-5 h-5" />;
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -56,7 +69,7 @@ const Navbar = () => {
     );
     setFilteredResults(filtered);
     setShowSuggestions(true);
-  }, [bouncedQuery]);
+  }, [bouncedQuery, allItems]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,7 +92,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center">
             <img
-              src="Produk/Slideshow/Logo Brand.png"
+              src="/produk/Slideshow/Logo Brand.png"
               alt="Beautica Beauty Colour Logo"
               className="h-10 object-contain"
             />
@@ -135,7 +148,7 @@ const Navbar = () => {
                   return (
                     <button
                       key={option.value}
-                      onClick={() => setMode(option.value as any)}
+                      onClick={() => setMode(option.value)}
                       className={`flex items-center justify-center w-8 h-8 rounded-md transition-colors ${
                         isActive
                           ? 'bg-pink-100 text-pink-600 dark:bg-pink-900 dark:text-pink-300'
@@ -144,7 +157,7 @@ const Navbar = () => {
                     >
                       {option.icon === 'custom' ? (
                         <img
-                          src="/Produk/Logo/auto-mode.png"
+                          src="/produk/Logo/auto-mode.png"
                           alt="Auto"
                           className="w-5 h-5 dark:invert"
                         />
@@ -184,7 +197,7 @@ const Navbar = () => {
                 return (
                   <button
                     key={option.value}
-                    onClick={() => setMode(option.value as any)}
+                    onClick={() => setMode(option.value)}
                     className={`flex items-center justify-center w-8 h-8 rounded-md transition-colors ${
                       isActive
                         ? 'bg-pink-100 text-pink-600 dark:bg-pink-900 dark:text-pink-300'
@@ -193,7 +206,7 @@ const Navbar = () => {
                   >
                     {option.icon === 'custom' ? (
                       <img
-                        src="/Produk/Logo/auto-mode.png"
+                        src="/produk/Logo/auto-mode.png"
                         alt="Auto"
                         className="w-5 h-5 dark:invert"
                       />

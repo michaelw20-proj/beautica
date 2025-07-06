@@ -1,133 +1,25 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
+import { getAllProducts } from '../data/products';
 
 const Makeup = () => {
   const navigate = useNavigate();
 
-  const products = [
-    // Air Cushion Category
-    {
-      id: 1,
-      name: "Air Cushion",
-      category: "Cushion",
-      image: "produk/Cushion/cushion.png",
-      description: "",
-      slug: "air-cushion"
-    },
-    // Eyeliner Category
-    {
-      id: 2,
-      name: "BEAUTICA Eyeliner Brilliant",
-      category: "Eyeliner",
-      image: "/Produk/Eyeliner/eyeliner-briliant.png",
-      description: "",
-      slug: "e-brill"
-    },
-    {
-      id: 3,
-      name: "BEAUTICA Eyeliner Kuning",
-      category: "Eyeliner",
-      image: "/Produk/Eyeliner/eyeliner-kuning.png",
-      description: "",
-      slug: "e-kuning"
-    },
-    {
-      id: 4,
-      name: "BEAUTICA Eyeliner Marble",
-      category: "Eyeliner",
-      image: "/Produk/Eyeliner/eyeliner-marble.png",
-      description: "",
-      slug: "e-marble"
-    },
-    {
-      id: 5,
-      name: "BEAUTICA Eyeliner Pencil",
-      category: "Eyeliner",
-      image: "/Produk/Eyeliner/eyeliner-pencil.png",
-      description: "",
-      slug: "e-pencil"
-    },
-    // Eyeshadow Category
-    {
-      id: 6,
-      name: "BEAUTICA Eyeshadow 10-mix",
-      category: "Eyeshadow",
-      image: "/Produk/Eyeshadow/10-mix-eyeshadow.png",
-      description: "",
-      slug: "es-10mix"
-    },
-    {
-      id: 7,
-      name: "BEAUTICA Eyeshadow Best Of Me",
-      category: "Eyeshadow",
-      image: "/Produk/Eyeshadow/Eyeshadow-best-of-me.png",
-      description: "",
-      slug: "es-bestofme"
-    },
-    {
-      id: 8,
-      name: "BEAUTICA Sweet Eyeshadow",
-      category: "Eyeshadow",
-      image: "/Produk/Eyeshadow/sweet-eyeshadow.png",
-      description: "",
-      slug: "es-sweet"
-    },
-    // Lips Category
-    {
-      id: 9,
-      name: "BEAUTICA Lip Cream Feel Me",
-      category: "Lips",
-      image: "/Produk/Lips/lip-cream-feel-me.jpg",
-      description: "",
-      slug: "lip-feel"
-    },
-    {
-      id: 10,
-      name: "BEAUTY COLOUR Royale Kiss Lip Serum",
-      category: "Lips",
-      image: "/Produk/Lips/royale-kiss-lip-serum.jpg",
-      description: "",
-      slug: "lip-royale"
-    },
-     // Mascara Category
-     {
-      id: 11,
-      name: "BEAUTICA 2in1",
-      category: "Mascara",
-      image: "/Produk/Mascara/Beautica-2in1.jpg",
-      description: "",
-      slug: "m-2in1"
-    },
-    {
-      id: 12,
-      name: "BEAUTICA Mascara Marble",
-      category: "Mascara",
-      image: "/Produk/Mascara/beautica-mascara-marble.jpg",
-      description: "",
-      slug: "m-m"
-    },
-    {
-      id: 13,
-      name: "BEAUTICA Mascara Kuning",
-      category: "Mascara",
-      image: "/Produk/Mascara/mascara-kuning.jpg",
-      description: "",
-      slug: "m-k"
-    },
-    // Make Up Kit Category
-    {
-      id: 14,
-      name: "BEAUTICA Beauty Me Makeup Kit",
-      category: "Makeup Kit",
-      image: "/Produk/Makeup Kit/makeup-kit-love.jpg",
-      description: "",
-      slug: "muk-bm"
-    },
-  ];
+  // Get all products and filter out nail polish products
+  const allProducts = getAllProducts();
+  const products = allProducts.filter(product => 
+    product.category !== 'Nail Polish'
+  ).map(product => ({
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    image: product.images[0],
+    description: product.description,
+    slug: product.slug
+  }));
 
   const categories = [
     { 
@@ -173,8 +65,8 @@ const Makeup = () => {
     ? products 
     : products.filter(product => product.category === selectedCategory);
 
-  const handleProductClick = (product: any) => {
-    if (product.slug && product.slug !== "#" && product.slug.trim() !=='') {
+  const handleProductClick = (product: { id: number; name: string; category: string; image: string; description: string; slug: string; }) => {
+    if (product.slug) {
       navigate(`/products/${product.slug}`);
     }
   };

@@ -12,6 +12,7 @@ const NewArrival = () => {
       category: "Cushion",
       image: "produk/Cushion/cushion.png",
       description: "",
+      slug: "beauty-colour-air-cushion",
       isNew: true
     },
     {
@@ -20,6 +21,7 @@ const NewArrival = () => {
       category: "Lips",
       image: "/Produk/Lips/royale-kiss-lip-serum.png",
       description: "",
+      slug: "lip-royale",
       isNew: true
     },
     {
@@ -28,6 +30,7 @@ const NewArrival = () => {
       category: "Oil Nail Polish",
       image: "produk/Nail Polish/OIl Nail Polish/Maroon nail polish.png",
       description: "",
+      slug: "NP-maroon",
       isNew: true
     }
   ];

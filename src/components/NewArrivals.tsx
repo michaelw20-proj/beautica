@@ -9,6 +9,7 @@ const NewArrivals = () => {
       category: "Air Cushion",
       image: "produk/Cushion/cushion.png",
       description: "Air Cushion dari Beauty Colour punya coverage ringan tapi buildable, dengan hasil akhir natural yang bikin kulit keliatan sehat dan glowing seharian, ringan, praktis, dan cocok buat semua aktivitas.",
+      slug: "beauty-colour-air-cushion",
       isNew: true
     },
     {
@@ -17,6 +18,7 @@ const NewArrivals = () => {
       category: "Lips",
       image: "Produk/Lips/royale-kiss-lip-serum.jpg",
       description: "",
+      slug: "lip-royale",
       isNew: true
     },
     {
@@ -25,6 +27,7 @@ const NewArrivals = () => {
       category: "Nail Polish",
       image: "/Produk/Nail-Polish/OIl Nail Polish/Maroon-nail-polish.jpg",
       description: "",
+      slug: "NP-maroon",
       isNew: true
     },
   ];
